@@ -1,0 +1,9 @@
+{
+  "name": "Anas-Portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Anas Lari",
+  "scripts": {
+    "start": "npx --yes serve",
+    "dev": "npx --yes serve"
+  }
+}

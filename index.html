@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Anas Lari</title>
+    <script src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(0, 0, 0, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #000000, #121212, #000000);
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255,255,255,0.05);
+        }
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+        .section-title {
+            color: #6b21a8;
+            font-weight: 600;
+        }
+        a {
+            color: #8b5cf6;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #a78bfa;
+        }
+        .profile-image-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        .profile-image {
+            border-radius: 50%;
+            border: 3px solid #6b21a8;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .profile-image-container:hover .profile-image {
+            transform: translateZ(50px) rotateY(-10deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .skill-icon {
+            font-size: 2rem;
+            color: #6b21a8;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <canvas id="three-canvas"></canvas>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Header Section -->
+        <div class="glass-card p-6 col-span-1 md:col-span-3 flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-bold text-purple-600">Designer & Developer</h1>
+            <div class="flex items-center gap-4 profile-image-container">
+                <img src="/Users/anaslari/Downloads/Anas-portfolio/540DA1AA-5E3F-4F7B-866F-0FC2FA4E377C_1_105_c.jpeg" alt="Profile" class="profile-image w-24 h-24 md:w-32 md:h-32 object-cover">
+                <h2 class="text-xl font-semibold">Anas Lari</h2>
+            </div>
+        </div>
+
+        <!-- About Me -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">About Me</h3>
+            <p class="text-gray-300">A passionate developer and designer with a keen eye for creating innovative and user-friendly digital experiences. I specialize in web development, app development, UI/UX design, and bringing creative ideas to life through code.</p>
+        </div>
+
+        <!-- Education -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">Education</h3>
+            <div class="space-y-3">
+                <div>
+                    <h4 class="text-purple-400 font-medium">Bachelor of Computer Science in Artificial Intelligence and Machine Learning</h4>
+                    <p class="text-sm text-gray-300">Bengal Institute of Technology - Present</p>
+                </div>
+                <div>
+                    <h4 class="text-purple-400 font-medium">Diploma in Computer Science and Engineering</h4>
+                    <p class="text-sm text-gray-300">Aligarh Muslim University, Graduated 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">Contacts</h3>
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <i class="bi bi-envelope text-purple-500"></i>
+                    <span class="text-gray-300">anaslari4work@gmail.com</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="bi bi-phone text-purple-500"></i>
+                    <span class="text-gray-300">+91 </span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="bi bi-geo-alt text-purple-500"></i>
+                    <span class="text-gray-300">Kolkata, India</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">Technical Skills</h3>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <i class="bi bi-code-slash skill-icon"></i>
+                    <p class="text-sm text-gray-300">Web Dev</p>
+                </div>
+                <div>
+                    <i class="bi bi-palette skill-icon"></i>
+                    <p class="text-sm text-gray-300">UI/UX</p>
+                </div>
+                <div>
+                    <i class="bi bi-phone skill-icon"></i>
+                    <p class="text-sm text-gray-300">Mobile Dev</p>
+                </div>
+                <div>
+                    <i class="bi bi-cloud skill-icon"></i>
+                    <p class="text-sm text-gray-300">Cloud</p>
+                </div>
+                <div>
+                    <i class="bi bi-database skill-icon"></i>
+                    <p class="text-sm text-gray-300">Databases</p>
+                </div>
+                <div>
+                    <i class="bi bi-gear skill-icon"></i>
+                    <p class="text-sm text-gray-300">DevOps</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Languages -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">Code Languages</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-purple-500">▪</span>
+                    <span class="text-gray-300">JavaScript</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-purple-500">▪</span>
+                    <span class="text-gray-300">Python</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-purple-500">▪</span>
+                    <span class="text-gray-300">Java</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-purple-500">▪</span>
+                    <span class="text-gray-300">C</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-purple-500">▪</span>
+                    <span class="text-gray-300">Dart</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">Languages</h3>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-gray-300">Hindi</span>
+                    <span class="text-purple-500">Native</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-300">English</span>
+                    <span class="text-purple-500">Fluent</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="glass-card p-6">
+            <h3 class="section-title mb-4">Social Links</h3>
+            <div class="flex gap-4 justify-center">
+                <a href="https://github.com/anaslari23" target="_blank" class="text-gray-300 hover:text-purple-500"><i class="bi bi-github text-2xl"></i></a>
+                <a href="https://linkedin.com/in/anas-lari-2626aa247" target="_blank" class="text-gray-300 hover:text-purple-500"><i class="bi bi-linkedin text-2xl"></i></a>
+                <a href="https://x.com/anas_larii" target="_blank" class="text-gray-300 hover:text-purple-500"><i class="bi bi-twitter text-2xl"></i></a>
+                <a href="https://pinterest.com/anaslari610" target="_blank" class="text-gray-300 hover:text-purple-500"><i class="bi bi-pinterest text-2xl"></i></a>
+            </div>
+        </div>
+
+        <!-- Past Work/Projects -->
+        <div class="glass-card p-6 col-span-1 md:col-span-3">
+            <h3 class="section-title mb-4">Past Work/Projects</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="https://github.com/anaslari23/max-ai" target="_blank" class="glass-card p-4 cursor-pointer hover:bg-purple-900/20 transition-all">
+                    <h4 class="font-medium text-purple-400">Project 1: Web App</h4>
+                    <p class="text-sm text-gray-400">An AI developed using Python and HTML/CSS</p>
+                </a>
+                <a href="https://github.com/anaslari23/career_finder" target="_blank" class="glass-card p-4 cursor-pointer hover:bg-purple-900/20 transition-all">
+                    <h4 class="font-medium text-purple-400">Project 2: Mobile App</h4>
+                    <p class="text-sm text-gray-400">Cross-platform mobile application developed using Flutter</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer, glowElements = [], mouseX = 0, mouseY = 0;
+
+        function createGlowingGeometry(color, size) {
+            const geometry = new THREE.IcosahedronGeometry(size, 2);
+            
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    color: { value: new THREE.Color(color) },
+                    opacity: { value: 0.3 }
+                },
+                vertexShader: `
+                    varying vec3 vNormal;
+                    void main() {
+                        vNormal = normalize(normalMatrix * normal);
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 color;
+                    uniform float opacity;
+                    varying vec3 vNormal;
+                    void main() {
+                        float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 4.0);
+                        gl_FragColor = vec4(color, intensity * opacity);
+                    }
+                `,
+                transparent: true,
+                blending: THREE.AdditiveBlending
+            });
+
+            return { geometry, material };
+        }
+
+        function initShinyBackground() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('three-canvas'), 
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            const colors = [
+                0x6b21a8, 0x3b82f6, 0x10b981, 0x8b5cf6, 0xf43f5e
+            ];
+
+            for (let i = 0; i < 20; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const { geometry, material } = createGlowingGeometry(color, 0.3 + Math.random() * 0.3);
+                const mesh = new THREE.Mesh(geometry, material);
+
+                mesh.position.set(
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10
+                );
+
+                mesh.userData = {
+                    rotationSpeed: {
+                        x: (Math.random() - 0.5) * 0.02,
+                        y: (Math.random() - 0.5) * 0.02,
+                        z: (Math.random() - 0.5) * 0.02
+                    },
+                    originalPosition: mesh.position.clone()
+                };
+
+                scene.add(mesh);
+                glowElements.push(mesh);
+            }
+
+            camera.position.z = 5;
+        }
+
+        function animateShinyBackground() {
+            requestAnimationFrame(animateShinyBackground);
+
+            glowElements.forEach(element => {
+                element.rotation.x += element.userData.rotationSpeed.x;
+                element.rotation.y += element.userData.rotationSpeed.y;
+                element.rotation.z += element.userData.rotationSpeed.z;
+
+                // Add subtle movement based on mouse position
+                element.position.x = element.userData.originalPosition.x + mouseX * 0.001;
+                element.position.y = element.userData.originalPosition.y + mouseY * 0.001;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        function resizeShinyBackground() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        initShinyBackground();
+        animateShinyBackground();
+
+        window.addEventListener('resize', resizeShinyBackground);
+
+        // Track mouse movement
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX - window.innerWidth / 2;
+            mouseY = event.clientY - window.innerHeight / 2;
+        });
+
+        // 3D Profile Image Effect
+        const profileImageContainer = document.querySelector('.profile-image-container');
+        const profileImage = document.querySelector('.profile-image');
+
+        profileImageContainer.addEventListener('mousemove', (e) => {
+            const rect = profileImageContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const rotateY = ((x - rect.width / 2) / rect.width) * 15;
+            const rotateX = ((y - rect.height / 2) / rect.height) * 15;
+            
+            profileImage.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`;
+        });
+
+        profileImageContainer.addEventListener('mouseleave', () => {
+            profileImage.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+        });
+
+        // Interactive cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const rotateY = ((x - rect.width / 2) / rect.width) * 10;
+                const rotateX = ((y - rect.height / 2) / rect.height) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
+
